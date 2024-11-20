@@ -96,7 +96,22 @@
             ['촉촉오징어', '닭/건어물 3행 2열'],
             ['마른오징어', '닭/건어물 3행 3열'],
             ['한치', '닭/건어물 3행 4열'],
-            ['을지로먹태', '닭/건어물 3행 5열']
+            ['을지로먹태', '닭/건어물 3행 5열'],
+            ['김치마요주먹밥', '식사/사리추가 1행 1열'],
+            ['소고기주먹밥', '식사/사리추가 1행 2열'],
+            ['승연이불닭참치주먹밥', '식사/사리추가 1행 3열'],
+            ['버터간장계란밥', '식사/사리추가 1행 4열'],
+            ['추억의옛날도시락', '식사/사리추가 1행 5열'],
+            ['공기밥', '식사/사리추가 2행 1열'],
+            ['볶음김치추가', '식사/사리추가 2행 2열'],
+            ['우동사리', '식사/사리추가 2행 3열'],
+            ['라면사리', '식사/사리추가 2행 4열'],
+            ['칼국수사리', '식사/사리추가 2행 5열'],
+            ['순두부추가', '식사/사리추가 3행 1열'],
+            ['슬라이스치즈추가', '식사/사리추가 3행 2열'],
+            ['계란후라이추가', '식사/사리추가 3행 3열'],
+            ['고기추가', '식사/사리추가 3행 4열'],
+            ['추가아이스크림', '식사/사리추가 3행 5열']
         ]);
         // const form1 = "<div class=\"menu";
         // const form2 = "\"> \
@@ -120,13 +135,26 @@
 
         add_button.addEventListener("click", () => {
             const menuName = read_text_element.value.trim();
-            const menuNum = read_num_element.value.trim();
-            const location = menuMap.get(menuName).trim();
-            read_num_element.value = "";
-            read_text_element.value = "";
-            var text = "<pre>" + menuName + "  " + menuNum + "개" + " \n=> " + location + "</pre>";
-            menus.innerHTML += text;
+            const menuNum = read_num_element.value;
+
+            if (menuMap.has(menuName)) {
+                const location = menuMap.get(menuName).trim();
+                read_num_element.value = "";
+                read_text_element.value = "";
+                var text = "<pre>" + menuName + "  " + menuNum + "개" + " \n=> " + location + "</pre>";
+                menus.innerHTML += text;
+            } else {
+                read_num_element.value = "";
+                read_text_element.value = "";
+                var text = "<pre>" + menuName + "  " + menuNum + "개</pre>";
+                menus.innerHTML += text;
+            }
+            
         });
+
+        function tlqkffunction(ob) {
+            read_text_element.value = ob.innerText;
+        }
 
         read_text_element.addEventListener("change", () => {
             var counter = 0;
@@ -134,7 +162,7 @@
             menuMap.forEach((value, key, map) => {
                 if (key.indexOf(read_text_element.value) != -1 && counter != 5) {
                     counter += 1;
-                    write_tlqkf_element.innerHTML += "<div>"+key+"</div>";
+                    write_tlqkf_element.innerHTML += "<div onclick=\"tlqkffunction(this);\">"+key+"</div>";
                 }
             });
         });
