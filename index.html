@@ -78,7 +78,25 @@
             ['숱뚜껑닭한마리칼국수', '전/시원/베스트/치즈 5행 1열'],
             ['새마을육회한접시', '전/시원/베스트/치즈 5행 2열'],
             ['콘치즈씹새우', '전/시원/베스트/치즈 6행 1열'],
-            ['피자치즈스틱&치즈볼', '전/시원/베스트/치즈 6행 2열']
+            ['피자치즈스틱&치즈볼', '전/시원/베스트/치즈 6행 2열'],
+            ['제철꼬막', '해물/분식/볶음 1행 1열'],
+            ['새우소금구이', '해물/분식/볶음 1행 2열'],
+            ['소고기차돌라면', '해물/분식/볶음 3행 1열'],
+            ['모듬감자와오다리튀김', '해물/분식/볶음 3행 2열'],
+            ['돈카츠라볶이', '해물/분식/볶음 3행 3열'],
+            ['신당동즉석떡볶이', '해물/분식/볶음 3행 4열'],
+            ['추억의쏘야', '해물/분식/볶음 5행 1열'],
+            ['네얼굴철판두부김치', '해물/분식/볶음 5행 2열'],
+            ['매운직화오돌뼈', '해물/분식/볶음 5행 3열'],
+            ['차돌박이숙주볶음', '해물/분식/볶음 5행 4열'],
+            ['옛날순살치킨', '닭/건어물 1행 1열'],
+            ['핫윙봉&모듬감자', '닭/건어물 1행 2열'],
+            ['가평솥뚜껑닭도리탕', '닭/건어물 1행 3열'],
+            ['쥐포', '닭/건어물 3행 1열'],
+            ['촉촉오징어', '닭/건어물 3행 2열'],
+            ['마른오징어', '닭/건어물 3행 3열'],
+            ['한치', '닭/건어물 3행 4열'],
+            ['을지로먹태', '닭/건어물 3행 5열']
         ]);
         // const form1 = "<div class=\"menu";
         // const form2 = "\"> \
@@ -91,20 +109,34 @@
         //     <div class=\"tlqkfText\"> \
         //         \
         //     </div> \
-        // </div>";
+        // </div>";]
+        
         const menus = document.querySelector(".menus");
         const add_button = document.querySelector(".add_button");
         const read_text_element = document.querySelector(".inputText");
         const write_element = document.querySelector(".tlqkfText");
         const read_num_element = document.querySelector(".inputNum");
+        const write_tlqkf_element = document.querySelector(".tlqkf");
 
         add_button.addEventListener("click", () => {
             const menuName = read_text_element.value.trim();
             const menuNum = read_num_element.value.trim();
             const location = menuMap.get(menuName).trim();
-
+            read_num_element.value = "";
+            read_text_element.value = "";
             var text = "<pre>" + menuName + "  " + menuNum + "개" + " \n=> " + location + "</pre>";
             menus.innerHTML += text;
+        });
+
+        read_text_element.addEventListener("change", () => {
+            var counter = 0;
+            write_tlqkf_element.innerHTML = "";
+            menuMap.forEach((value, key, map) => {
+                if (key.indexOf(read_text_element.value) != -1 && counter != 5) {
+                    counter += 1;
+                    write_tlqkf_element.innerHTML += "<div>"+key+"</div>";
+                }
+            });
         });
     </script>
 </body>
