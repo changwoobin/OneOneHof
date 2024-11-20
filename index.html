@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OneOneHof</title>
-    <script></script>
+    <style>
+        .menu {
+            margin: 10px;
+        }
+        .inputNum {
+            width: 30px;
+        }
+    </style>
 </head>
 <body>
     <head>
@@ -12,20 +19,93 @@
         <input type="number" style="width: 40px;">
         <h3 style="display:inline;">테이블</h3>
     </head>
+    <div class="menu">
+        <input type="text" class="inputText">
+        <input type="number" class="inputNum"> 
+        <input type="button" value="추가하기" class="add_button">
+        <div class="tlqkf"> 
+            
+        </div> 
+        <div class="tlqkfText"> 
+            
+        </div> 
+    </div>
     <div class="menus">
-        <div class="menu">
-            <input type="text">
-            <input type="button" value="포스기 위치 보기">
-            <div class="tlqkf">
-                
-            </div>
-            <div class="tlqkfText">
+    </div>
+    <script>
+        const menuMap = new Map([
+            ['할머니표잔치국수', '신메뉴/탕 1행 1열'],
+            ['미니돈까스&치킨너겟', '신메뉴/탕 1행 2열'],
+            ['파송송계란찜','신메뉴/탕 1행 3열'],
+            ['동대문컵라면볶음밥', '신메뉴/탕 1행 4열'],
+            ['미니메론화채', '신메뉴/탕 1행 5열'],
+            ['40cm야채계마의리', '신메뉴/탕 2행 1열'],
+            ['새우볼&감자말이새우튀김', '신메뉴/탕 2행 2열'],
+            ['생크림&요플레&생딸기', '신메뉴/탕 2행 3열'],
+            ['흑후추생똥집볶음', '신메뉴/탕 2행 5열'],
+            ['야심찬숯불무뼈닭발', '신메뉴/탕 3행 1열'],
+            ['요구르트샤베트&메론', '신메뉴/탕 3행 2열'],
+            ['크림치즈빠네&치즈닭갈비', '신메뉴/탕 3행 3열'],
+            ['족발수육&파무침', '신메뉴/탕 3행 4열'],
+            ['옛날바베큐훈제치킨', '신메뉴/탕 3행 5열'],
+            ['점보할머니표잔치국수', '신메뉴/탕 4행 1열'],
+            ['파인샤베트이벤트', '신메뉴/탕 5행 1열'],
+            ['콩나물해장국밥', '신메뉴/탕 6행 1열'],
+            ['새마을오뎅탕', '신메뉴/탕 6행 2열'],
+            ['촌돼지순두부김치찌개', '신메뉴/탕 6행 3열'],
+            ['놀부부대찌개', '신메뉴/탕 6행 4열'],
+            ['새마을스팸참치김치짜글이', '신메뉴/탕 6행 5열'],
+            ['궁중샤브샤브전골', '신메뉴/탕 7행 1열'],
+            ['얼큰소고기버섯나베', '신메뉴/탕 7행 2열'],
+            ['얼큰홍합가득짬뽕탕', '신메뉴/탕 7행 3열'],
+            ['새마을김치전', '전/시원/베스트/치즈 1행 1열'],
+            ['종로해물파전', '전/시원/베스트/치즈 1행 2열'],
+            ['월컨투동막골감자채전', '전/시원/베스트/치즈 1행 3열'],
+            ['황도', '전/시원/베스트/치즈 2행 1열'],
+            ['미니수박화채', '전/시원/베스트/치즈 2행 2열'],
+            ['미니과일', '전/시원/베스트/치즈 2행 3열'],
+            ['파인샤베트&메론', '전/시원/베스트/치즈 2행 4열'],
+            ['너와나의묵사발', '전/시원/베스트/치즈 3행 1열'],
+            ['아이스크로와플', '전/시원/베스트/치즈 3행 2열'],
+            ['새마을닭꼬치', '전/시원/베스트/치즈 3행 3열'],
+            ['치즈김치볶음밥', '전/시원/베스트/치즈 3행 4열'],
+            ['소고기사천짜파구리', '전/시원/베스트/치즈 3행 5열'],
+            ['콩나물불제육철판', '전/시원/베스트/치즈 4행 1열'],
+            ['남산왕돈가스', '전/시원/베스트/치즈 4행 2열'],
+            ['해물계란탕', '전/시원/베스트/치즈 4행 3열'],
+            ['얼큰고추장찌개', '전/시원/베스트/치즈 4행 4열'],
+            ['육개장수육전골', '전/시원/베스트/치즈 4행 5열'],
+            ['숱뚜껑닭한마리칼국수', '전/시원/베스트/치즈 5행 1열'],
+            ['새마을육회한접시', '전/시원/베스트/치즈 5행 2열'],
+            ['콘치즈씹새우', '전/시원/베스트/치즈 6행 1열'],
+            ['피자치즈스틱&치즈볼', '전/시원/베스트/치즈 6행 2열']
+        ]);
+        // const form1 = "<div class=\"menu";
+        // const form2 = "\"> \
+        //     <input type=\"text\" class=\"inputText\"> \
+        //     <input type=\"button\" onclick=\"searchMenu(" 
+        // const form3 = ");\" value=\"위치 보기\"> \
+        //     <div class=\"tlqkf\"> \
+        //         \
+        //     </div> \
+        //     <div class=\"tlqkfText\"> \
+        //         \
+        //     </div> \
+        // </div>";
+        const menus = document.querySelector(".menus");
+        const add_button = document.querySelector(".add_button");
+        const read_text_element = document.querySelector(".inputText");
+        const write_element = document.querySelector(".tlqkfText");
+        const read_num_element = document.querySelector(".inputNum");
 
-            </div>
-        </div>
-    </div>
-    <div>
-        <input type="button" value="메뉴 추가하기" style="width: 200px; height: 30px; margin: 50px;">
-    </div>
+        add_button.addEventListener("click", () => {
+            const menuName = read_text_element.value.trim();
+            const menuNum = read_num_element.value.trim();
+            const location = menuMap.get(menuName).trim();
+
+            var text = "<pre>" + menuName + "  " + menuNum + "개" + " \n=> " + location + "</pre>";
+            menus.innerHTML += text;
+        });
+    </script>
 </body>
 </html>
